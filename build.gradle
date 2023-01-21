@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'CPEN 221'
+group 'nwHacks'
 version '1.0-SNAPSHOT'
 
 repositories {
