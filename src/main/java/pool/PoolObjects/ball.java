@@ -1,5 +1,5 @@
 package main.java.pool.PoolObjects;
 
-public class Ball {
+public interface ball {
     
 }
