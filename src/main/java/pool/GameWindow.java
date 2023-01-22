@@ -1,11 +1,16 @@
-package main.java.pool;
+package pool;
 
 import java.awt.*; 
 
+import javax.swing.Timer;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*; 
 
-public class GameWindow {
-    public static void createWindow(){
+public class GameWindow extends JFrame implements ActionListener{
+    public void createWindow(){
         JFrame frame = new JFrame("Game Window");
         frame.setAlwaysOnTop(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,6 +24,12 @@ public class GameWindow {
         frame.setVisible(true);
 
 
+        Timer time = new Timer(20, this);
+        time.start();
 
+    }
+
+    public void actionPerformed(ActionEvent e){
+        repaint();
     }
 }

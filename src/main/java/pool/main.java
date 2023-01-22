@@ -1,6 +1,4 @@
-package main.java.pool;
-
-import main.java.pool.GameWindow;
+package pool;
 
 public class main {
 
