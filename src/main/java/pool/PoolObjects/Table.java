@@ -1,4 +1,4 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import javax.swing.*;
 import javax.swing.JPanel;
@@ -23,6 +23,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private ArrayList<Ball> pocketed;
     public Cue cue;
     private int Y;
+    private int cursordir;
 
     private int temp;
 
@@ -143,8 +144,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         // TODO Auto-generated method stub
         Point location = MouseInfo.getPointerInfo().getLocation();
         Y = (int) Math.round(location.getY());    
-        temp = Y; 
-        
+        temp = Y;
     }
 
     @Override
@@ -165,18 +165,22 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
     @Override
     public void mouseDragged(java.awt.event.MouseEvent e) {
-        System.out.println("confirm"); 
+        System.out.println("" + cursordir);
         
         Point location = MouseInfo.getPointerInfo().getLocation();
         int newY = (int) Math.round(location.getY());
 
-        int deltaTheta = (Y - newY)/50;
-        
-        if(temp < newY){
-            deltaTheta = -deltaTheta;
+        if (temp < newY && cursordir != 0) {
+            cursordir = 0;
+            Y = newY;
+        } else if (temp > newY && cursordir != 1) {
+            cursordir = 1;
+            Y = newY;
         }
+
+        int deltaTheta = (Y - newY)/20;
+
         temp = newY;
-        Y = newY;
         cue.updatePos(deltaTheta);
         repaint();
     }
