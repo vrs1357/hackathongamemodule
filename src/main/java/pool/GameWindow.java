@@ -1,35 +1,75 @@
-package pool;
+package main.java.pool;
 
-import java.awt.*; 
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import javax.swing.Timer;
+import java.awt.FlowLayout;
+import java.awt.Container;
+import javax.swing.plaf.DimensionUIResource;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+public class GameWindow extends JFrame {
+    //setting up the viewing
+    private int width;
+    private int height;
+    private Container controls;
+    
+    // slider components
+    private JSlider power;
+    private int minPower = 0;
+    private int maxPower = 10;
+    
+    
+    //button components
 
-import javax.swing.*; 
+    private JButton shoot;
 
-public class GameWindow extends JFrame implements ActionListener{
+    public GameWindow(int w, int h){
+        width = w;
+        height = h;
+        controls = getContentPane();
+        FlowLayout flow = new FlowLayout();
+        controls.setLayout(flow);
+        shoot = new JButton("Shoot");
+        controls.add(shoot);
+        power = new JSlider(JSlider.HORIZONTAL, minPower, maxPower, minPower);
+        power.setMinorTickSpacing(1);
+        power.setMajorTickSpacing(2);
+        power.setPaintTicks(true);
+        power.setPaintLabels(true);
+        controls.add(power);
+
+    }
+
     public void createWindow(){
-        JFrame frame = new JFrame("Game Window");
-        frame.setAlwaysOnTop(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // TODO: frame.setSize(0, 0);
+        setSize(width, height);
+        setTitle("Game Window");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // add(power);
 
-        JLabel todoJLabel = new JLabel("To do: finish designing the window", SwingConstants.CENTER);
-        todoJLabel.setPreferredSize(new Dimension(300,100));
-        frame.getContentPane().add(todoJLabel, BorderLayout.CENTER);
-        frame.pack();
-
-        frame.setVisible(true);
-
-
-        Timer time = new Timer(20, this);
-        time.start();
+        // last command of frame instantiation
+        setVisible(true);
 
     }
+    // use this to compile all actionListeners
+    public void setUpListeners() {
+        ActionListener buttonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                System.out.println("bruh moment");
+            }
+        };
 
-    public void actionPerformed(ActionEvent e){
-        repaint();
+        shoot.addActionListener(buttonListener);
+        power.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                System.out.println(power.getValue());                
+            }
+            
+        });
     }
+
 }
