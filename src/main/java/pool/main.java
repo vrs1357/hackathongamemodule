@@ -6,6 +6,7 @@ public class main {
         GameWindow window = new GameWindow(1280, 720);
         window.createWindow();
         window.setUpListeners();
+
     }
 }
 
