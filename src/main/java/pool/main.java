@@ -1,4 +1,4 @@
-package main.java.pool;
+package pool;
 
 public class main {
 
