@@ -1,4 +1,4 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import javax.swing.JPanel;
 import javax.swing.event.MouseInputListener;
@@ -7,6 +7,7 @@ import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.MouseEvent;
 import org.w3c.dom.views.AbstractView;
 
+import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -42,8 +43,12 @@ public class Table extends JPanel{
     }
 
     // for initializing a new game
-    public void initializeGame(){
+    public void initializeGame(JPanel panel){
         //TODO: render the table, set relative positions of the game
+
+        this.setBounds(50, 100, 30, 250);
+        this.setBackground(Color.GREEN);
+        panel.add(this);
     }
     
 }
