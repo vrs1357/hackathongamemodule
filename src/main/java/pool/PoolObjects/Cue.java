@@ -10,8 +10,6 @@ public class Cue{
     private int x;
     private int y;
 
-    private int Y;
-
     private int length = 300;
     private Color cueColor;
     public double angle; // in degrees
@@ -45,6 +43,11 @@ public class Cue{
 
     public void updatePos(int angle){
         this.angle = this.angle + angle;
+    }
+
+    public void updatePos(double x, double y){
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
 }

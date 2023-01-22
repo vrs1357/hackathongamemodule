@@ -184,6 +184,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
         temp = newY;
         cue.updatePos(deltaTheta);
+        cue.updatePos(cueBall.getX(), cueBall.getY());
         repaint();
     }
 
