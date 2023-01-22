@@ -1,4 +1,4 @@
-package pool.PoolObjects;
+package main.java.pool.PoolObjects;
 
 public class CueBall extends Ball {
     public CueBall(int num, double xPos, double yPos) {
