@@ -66,6 +66,10 @@ public class Ball {
         return this.y;
     }
 
+//    public double getRadius() {
+//        return RADIUS;
+//    }
+
     public boolean isInHole() {
         return this.inHole;
     }
@@ -113,6 +117,7 @@ public class Ball {
             }
         });
         timer.start();
+        checkBallCollisions();
         sink();
         checkCollideTable();
     }
@@ -166,6 +171,19 @@ public class Ball {
         }
     }
 
+    public void checkBallCollisions() {
+        ArrayList<Ball> balls = gameTable.getBalls();
+        for (int i = 0; i < balls.size(); i++) {
+            if (i != this.number) {
+                Ball b = balls.get(i);
+                double dist = this.getDistanceOtherBall(b);
+                if (dist <= RADIUS) {
+                    this.collideBall(b);
+                }
+            }
+        }
+    }
+
     public void collideBall(Ball ballCollide) {
         double theta = Math.atan2(ballCollide.y - this.y, ballCollide.x - this.x);
         double component1 = this.getComponent(theta);
@@ -175,6 +193,7 @@ public class Ball {
         this.speed_y = Math.sin(theta) * (component2 - component1);
         ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
         ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
+        ballCollide.move();
 
         // tracker to switch turns
         if(contact == 0){
@@ -183,15 +202,19 @@ public class Ball {
         }
     }
 
+    public double getDistanceOtherBall(Ball ballOther) {
+        return Math.sqrt(Math.pow(ballOther.getX() - x, 2) + Math.pow(ballOther.getY() - y, 2));
+    }
+
     // direction: true->x-direction; false->y-direction
     public void checkCollideTable() {
-        if (this.x <= gameTable.getBroundar().get(0)){
+        if (this.x <= gameTable.getBroundary().get(0)){
             this.speed_x = Math.abs(this.speed_x);
-        }else if(this.x >= gameTable.getBroundar().get(1)) {
+        }else if(this.x >= gameTable.getBroundary().get(1)) {
             this.speed_x = -1*Math.abs(this.speed_x);
-        } else if(this.y <= gameTable.getBroundar().get(2)){
+        } else if(this.y <= gameTable.getBroundary().get(2)){
             this.speed_y = Math.abs(this.speed_y);
-        } else if(this.y >= gameTable.getBroundar().get(3)) {
+        } else if(this.y >= gameTable.getBroundary().get(3)) {
             this.speed_y = -1*Math.abs(this.speed_y);
         }
     }

@@ -73,8 +73,12 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         this.addMouseListener(this);
     }
 
-    public ArrayList<Integer> getBroundar() {
+    public ArrayList<Integer> getBroundary() {
         return BOUNDARY;
+    }
+
+    public ArrayList<Ball> getBalls() {
+        return balls;
     }
 
     public ArrayList<Map.Entry<Integer, Integer>> getHoles() {
@@ -85,6 +89,19 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         pocketed.add(num, balls.get(num));
         whatashot = true;
     }
+
+//    public void checkBallCollisions() {
+//        for (int i = 0; i < balls.size(); i++) {
+//            for (int j = i + 1; j < balls.size(); j++) {
+//                Ball b1 = balls.get(i);
+//                Ball b2 = balls.get(j)
+//                double dist = b1.getDistanceOtherBall(b2);
+//                if (dist <= b1.getRadius()) {
+//                    b1.collideBall(b2);
+//                }
+//            }
+//        }
+//    }
 
     // for initializing a new game
     public void initializeGame(JPanel panel){
