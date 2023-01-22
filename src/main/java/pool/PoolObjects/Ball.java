@@ -93,7 +93,7 @@ public class Ball {
             int holeX = hole.getKey();
             int holeY = hole.getValue();
 
-            if (Math.sqrt(Math.pow(holeX-this.x, 2) + Math.pow(holeY-this.y, 2)) <= RADIUS) {
+            if (Math.sqrt(Math.pow(holeX-this.x, 2) + Math.pow(holeY-this.y, 2)) <= 20) {
                 this.inHole = true;
                 gameTable.pocketBall(this.number);
                 this.speed_y = 0;
@@ -177,7 +177,7 @@ public class Ball {
             if (i != this.number) {
                 Ball b = balls.get(i);
                 double dist = this.getDistanceOtherBall(b);
-                if (dist <= RADIUS) {
+                if (dist <= RADIUS * 2) {
                     this.collideBall(b);
                 }
             }
@@ -185,14 +185,20 @@ public class Ball {
     }
 
     public void collideBall(Ball ballCollide) {
-        double theta = Math.atan2(ballCollide.y - this.y, ballCollide.x - this.x);
-        double component1 = this.getComponent(theta);
-        double component2 = ballCollide.getComponent(theta);
+        if(Math.atan(this.speed_y/this.speed_x) > 1)
+        {
+            ballCollide.speed_y = this.speed_y;
+            this.speed_y = -this.speed_y;
+        }
+        else if (this.speed_x == 0){
+            ballCollide.speed_y = this.speed_y;
 
-        this.speed_x = Math.cos(theta) * (component2 - component1);
-        this.speed_y = Math.sin(theta) * (component2 - component1);
-        ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
-        ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
+            this.speed_y = -this.speed_y;
+        }
+        else{
+            ballCollide.speed_x = this.speed_x;
+            this.speed_x = -this.speed_x;
+        }
         ballCollide.move();
 
         // tracker to switch turns
