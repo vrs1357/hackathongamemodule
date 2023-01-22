@@ -185,14 +185,15 @@ public class Ball {
     }
 
     public void collideBall(Ball ballCollide) {
-        if(Math.atan(this.speed_y/this.speed_x) > 1)
-        {
-            ballCollide.speed_y = this.speed_y;
-            this.speed_y = -this.speed_y;
-        }
-        else if (this.speed_x == 0){
+        
+        if (this.speed_x == 0){
             ballCollide.speed_y = this.speed_y;
 
+            this.speed_y = -this.speed_y;
+        }
+        else if(Math.atan(this.speed_y/this.speed_x) > 1)
+        {
+            ballCollide.speed_y = this.speed_y;
             this.speed_y = -this.speed_y;
         }
         else{
