@@ -1,8 +1,10 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
+
+import java.awt.*;
 
 public class CueBall extends Ball {
-    public CueBall(int num, double xPos, double yPos) {
-        super(num, xPos, yPos);
+    public CueBall(int num, double xPos, double yPos, Color color) {
+        super(num, xPos, yPos, color);
     }
 
     // set the initial velocity in x and y direction; used when hit by cue

@@ -1,25 +1,29 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.Scanner;
 
 public class Ball {
     private static final double DECELERATION  = 0.02;
-    private static final double RADIUS = 10;
+    private static final double RADIUS = 12;
     private double x;
     private double y;
     protected double speed_x;
     protected double speed_y;
     private boolean inHole;
     private int number;
+    private Color color;
 
 
-    public Ball(int num, double xPos, double yPos) {
+    public Ball(int num, double xPos, double yPos, Color color) {
         this.inHole = false;
         this.number = num;
         this.x = xPos;
         this.y = yPos;
         this.speed_x = 0;
         this.speed_y = 0;
+        this.color = color;
     }
 
     public double getSpeedX() {
@@ -93,6 +97,18 @@ public class Ball {
             this.speed_x *= -1;
         } else {
             this.speed_y *= -1;
+        }
+    }
+
+    public void render(Graphics2D ball) {
+        //Graphics2D ball = (Graphics2D) g;
+        ball.setColor(this.color);
+        ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
+        if (this.number != 0) {
+            ball.setColor(Color.WHITE);
+            ball.fillOval((int)(this.x - 9.0), (int)(this.y - 7.3), 14, 14);
+            ball.setColor(Color.BLACK);
+            ball.drawString(String.valueOf(this.number), (int)(this.x - 6.3), (int)(this.y + 4.0));
         }
     }
 }

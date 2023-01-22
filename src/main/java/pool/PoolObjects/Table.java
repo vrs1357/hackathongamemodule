@@ -1,4 +1,4 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
@@ -14,23 +14,25 @@ import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import static javax.swing.border.EtchedBorder.RAISED;
+
 public class Table extends JPanel{
 
     private ArrayList<Ball> balls;
     private ArrayList<Ball> pocketed;
 
     public Table() {
-        ArrayList<Ball> balls = new ArrayList<Ball>();
-        CueBall cueBall = new CueBall(0, 10, 20);
-        Ball ball1 = new Ball(1, 60, 20);
-        Ball ball2 = new Ball(2, 65, 20);
-        Ball ball3 = new Ball(3, 65, 25);
-        Ball ball4 = new Ball(4, 70, 20);
-        Ball ball5 = new Ball(5, 70, 25);
-        Ball ball6 = new Ball(6, 70, 30);
-        Ball ball7 = new Ball(7, 75, 20);
-        Ball ball8 = new Ball(8, 75, 25);
-        Ball ball9 = new Ball(9, 80, 20);
+        balls = new ArrayList<Ball>();
+        CueBall cueBall = new CueBall(0, 280, 250, Color.WHITE);
+        Ball ball1 = new Ball(1, 700, 250, Color.YELLOW);
+        Ball ball2 = new Ball(2, 725, 237, Color.BLUE);
+        Ball ball3 = new Ball(3, 725, 263, Color.RED);
+        Ball ball4 = new Ball(4, 750, 224, Color.MAGENTA);
+        Ball ball5 = new Ball(5, 750, 250, Color.ORANGE);
+        Ball ball6 = new Ball(6, 750, 276, Color.GREEN);
+        Ball ball7 = new Ball(7, 775, 237, Color.red);
+        Ball ball8 = new Ball(8, 775, 263, Color.BLACK);
+        Ball ball9 = new Ball(9, 800, 250, Color.yellow);
 
         balls.add(ball1);
         balls.add(ball2);
@@ -113,7 +115,9 @@ public class Table extends JPanel{
 
         g2.drawRoundRect(100,50,800,400,40,40);
 
+
+        for (int i = 0; i < balls.size(); i++) {
+            balls.get(i).render(g2);
+        }
     }
-    
-    
 }

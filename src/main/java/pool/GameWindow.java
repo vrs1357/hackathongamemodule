@@ -1,4 +1,4 @@
-package main.java.pool;
+package pool;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import main.java.pool.PoolObjects.*;
+import pool.PoolObjects.*;
 
 
 public class GameWindow extends JFrame {
@@ -39,8 +39,6 @@ public class GameWindow extends JFrame {
     private Player player1;
     private Player player2;
 
-
-    // constructor
     public GameWindow(int w, int h){
         width = w;
         height = h;
@@ -57,7 +55,7 @@ public class GameWindow extends JFrame {
         power.setPaintLabels(true);
         gameTable = new Table();
     }
-    // get player names
+
     public void setup(){
 
         player1 = new Player(
@@ -78,19 +76,17 @@ public class GameWindow extends JFrame {
         playerTurn = new JTextArea(player1.name + "'s turn");
         playerTurn.setFont(playerTurn.getFont().deriveFont(35f));
         playerTurn.setEditable(false);
-        // constructing power slider
+
         slider = new JPanel();
         slider.add(sliderLabel);
         slider.add(power);
-        // constructing shoot button
+
         button = new JPanel();
         button.add(shoot);
-        // constructing turn windwow
+
         turn = new JPanel();
         turn.add(playerTurn);
-        // initializing the game
 
-        // assembling the main game window
         mainPanel = (JPanel)getContentPane();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         topPanel = new JPanel();
@@ -101,16 +97,14 @@ public class GameWindow extends JFrame {
         mainPanel.add(topPanel);
         gameTable.initializeGame(mainPanel);
 
-        
+
         // last command of frame instantiation
         pack();
         setVisible(true);
-
-
     }
 
 
-    // use this to compile all actionListeners for any interactive element on the board
+    // use this to compile all actionListeners
     public void setUpListeners() {
 
         ActionListener buttonListener = new ActionListener() {
