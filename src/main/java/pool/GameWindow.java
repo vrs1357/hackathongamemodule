@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import main.java.pool.PoolObjects.*;
+
 
 public class GameWindow extends JFrame {
     //setting up the viewing
@@ -15,9 +17,12 @@ public class GameWindow extends JFrame {
     private JPanel button;
     private JPanel mainPanel;
     private JPanel topPanel;
+    private JPanel botPanel;
     private JPanel turn;
     private JTextArea playerTurn;
     public boolean player1turn;
+
+    public Table gameTable;
     
     // slider components
     public JSlider power;
@@ -35,7 +40,7 @@ public class GameWindow extends JFrame {
         height = h;
         shoot = new JButton("Shoot");
         playerTurn = new JTextArea("Player 1 turn");
-        playerTurn.setFont(playerTurn.getFont().deriveFont(40f));
+        playerTurn.setFont(playerTurn.getFont().deriveFont(35f));
         playerTurn.setEditable(false);
         player1turn = true;
         sliderLabel = new JLabel("Shot Power:");
@@ -44,15 +49,14 @@ public class GameWindow extends JFrame {
         power.setMajorTickSpacing(5);
         power.setPaintTicks(true);
         power.setPaintLabels(true);
-
-        getContentPane().setBackground(Color.WHITE);;  //Whatever color
-
+        gameTable = new Table();
     }
 
     public void createWindow(){
         setSize(width, height);
         setTitle("Game Window");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setBackground(Color.YELLOW);
         slider = new JPanel();
         slider.add(sliderLabel);
         slider.add(power);
@@ -63,6 +67,10 @@ public class GameWindow extends JFrame {
         turn = new JPanel();
         turn.add(playerTurn);
 
+        botPanel = new JPanel();
+        gameTable.initializeGame();
+        botPanel.add(gameTable);
+
         mainPanel = (JPanel)getContentPane();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         topPanel = new JPanel();
@@ -71,6 +79,7 @@ public class GameWindow extends JFrame {
         topPanel.add(slider);
         topPanel.add(turn);
         mainPanel.add(topPanel);
+        mainPanel.add(botPanel);
         setLocationByPlatform(true);
 
         // last command of frame instantiation

@@ -42,7 +42,7 @@ public class Table extends JPanel implements MouseEvent, MouseInputListener{
     }
 
     // for initializing a new game
-    private void initializeGame(){
+    public void initializeGame(){
         //TODO: render the table, set relative positions of the game
     }
 
