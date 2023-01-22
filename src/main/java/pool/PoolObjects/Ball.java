@@ -184,10 +184,14 @@ public class Ball {
 
     // direction: true->x-direction; false->y-direction
     public void checkCollideTable() {
-        if (this.x <= gameTable.getBroundar().get(0) || this.x >= gameTable.getBroundar().get(1)) {
-            this.speed_x *= -1;
-        } else if (this.y <= gameTable.getBroundar().get(2) || this.y >= gameTable.getBroundar().get(3)) {
-            this.speed_y *= -1;
+        if (this.x <= gameTable.getBroundar().get(0)){
+            this.speed_x = Math.abs(this.speed_x);
+        }else if(this.x >= gameTable.getBroundar().get(1)) {
+            this.speed_x = -1*Math.abs(this.speed_x);
+        } else if(this.y <= gameTable.getBroundar().get(2)){
+            this.speed_y = Math.abs(this.speed_y);
+        } else if(this.y >= gameTable.getBroundar().get(3)) {
+            this.speed_y = -1*Math.abs(this.speed_y);
         }
     }
 

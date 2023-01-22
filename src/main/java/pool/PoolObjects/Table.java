@@ -28,7 +28,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     public boolean whatashot;
     public Cue cue;
     private int Y;
-    private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(100, 900, 100, 400));
+    private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(135, 865, 80, 420));
     private ArrayList<Map.Entry<Integer, Integer>> HOLES
             = new ArrayList<>(Arrays.asList(new AbstractMap.SimpleImmutableEntry<>(110, 60),
                                             new AbstractMap.SimpleImmutableEntry<>(500, 60),
