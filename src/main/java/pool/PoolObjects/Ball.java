@@ -114,7 +114,7 @@ public class Ball {
         }
         else if(getSpeed() < 0.6)
         {
-            this.DECELERATION = 0.9993;
+            this.DECELERATION = 0.997;
         }
         if(this.speed_x > 0){
             this.speed_x = this.speed_x*DECELERATION;
