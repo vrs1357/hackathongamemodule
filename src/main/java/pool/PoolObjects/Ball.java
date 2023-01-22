@@ -5,12 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.time.LocalTime;
-import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 public class Ball {
-    private static final double DECELERATION  = 0.00001;
+    private static double DECELERATION  = 0.997;
     private static final double RADIUS = 12;
     private double x;
     private double y;
@@ -41,6 +40,11 @@ public class Ball {
 
     public double getSpeedY() {
         return this.speed_y;
+    }
+
+    public double getSpeed() {
+        double speed = Math.sqrt(Math.pow(getSpeedY(), 2) + Math.pow(getSpeedX(), 2));
+        return speed;
     }
 
     public double getComponent(double theta) {
@@ -78,11 +82,12 @@ public class Ball {
     }
 
     public void move() {
+        System.out.println("Speed = " + getSpeed());
         secondsPassed = LocalTime.now().getSecond() - moveStartTime; 
         this.x += this.speed_x * secondsPassed/10;
         this.y += this.speed_y * secondsPassed/10;
         System.out.println("x = " + this.x);
-        decelerate(secondsPassed);
+        decelerate();
         moveStartTime = secondsPassed;
         Timer timer = new Timer(1000/60, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -99,15 +104,25 @@ public class Ball {
             move();
         }
     }
-    public void decelerate(double time) {
+    public void decelerate() {
+        if(getSpeed() <  0.3)
+        {
+            this.speed_x = 0;
+            this.speed_y = 0;
+            this.DECELERATION = 0.997;
+        }
+        else if(getSpeed() < 0.6)
+        {
+            this.DECELERATION = 0.9993;
+        }
         if(this.speed_x > 0){
-            this.speed_x = this.speed_x - (DECELERATION*time);
+            this.speed_x = this.speed_x*DECELERATION;
             if(this.speed_x < 0){
                 this.speed_x = 0;
             }
         }
         else if(this.speed_x < 0){
-            this.speed_x = this.speed_x + (DECELERATION*time);
+            this.speed_x = this.speed_x * (DECELERATION);
             if(this.speed_x > 0){
                 this.speed_x = 0;
             }
@@ -116,13 +131,13 @@ public class Ball {
             this.speed_x = 0;
         }
         if(this.speed_y > 0){
-            this.speed_y = this.speed_y - (DECELERATION*time);
+            this.speed_y = this.speed_y * (DECELERATION);
             if(this.speed_y < 0){
                 this.speed_y = 0;
             }
         }
         else if(this.speed_y < 0){
-            this.speed_y = this.speed_y+(DECELERATION*time);
+            this.speed_y = this.speed_y*(DECELERATION);
             if(this.speed_y > 0){
                 this.speed_y = 0;
             }
