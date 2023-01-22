@@ -1,7 +1,9 @@
 package pool.PoolObjects;
 
+import java.util.Scanner;
+
 public class Ball {
-    private static final int DECELERATION  = 261;
+    private static final double DECELERATION  = 0.02;
     private static final double RADIUS = 10;
     private double x;
     private double y;
@@ -28,6 +30,10 @@ public class Ball {
         return this.speed_y;
     }
 
+    public double getComponent(double theta) {
+        return Math.cos(theta) * this.x + Math.sin(theta) * this.y;
+    }
+
     public double getX() {
         return this.x;
     }
@@ -42,6 +48,14 @@ public class Ball {
 
     public int getNumber() {
         return this.number;
+    }
+
+    public void setSpeedX(double speed) {
+        this.speed_x = speed;
+    }
+
+    public void setSpeedY(double speed) {
+        this.speed_y = speed;
     }
 
     public void sink() {
@@ -62,7 +76,23 @@ public class Ball {
         this.speed_y -= DECELERATION * time;
     }
 
-    public void collide(Ball ballCollide) {
+    public void collideBall(Ball ballCollide) {
+        double theta = Math.atan2(ballCollide.y - this.y, ballCollide.x - this.x);
+        double component1 = this.getComponent(theta);
+        double component2 = ballCollide.getComponent(theta);
 
+        this.speed_x = Math.cos(theta) * (component2 - component1);
+        this.speed_y = Math.sin(theta) * (component2 - component1);
+        ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
+        ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
+    }
+
+    // direction: true->x-direction; false->y-direction
+    public void collideTable(boolean isX) {
+        if (isX) {
+            this.speed_x *= -1;
+        } else {
+            this.speed_y *= -1;
+        }
     }
 }
