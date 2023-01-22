@@ -1,6 +1,7 @@
 package main.java.pool;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -32,6 +33,7 @@ public class GameWindow extends JFrame {
     
     //button components
     private JButton shoot;
+    private Dimension bd = new Dimension(100, 60);
 
     // Player details
     private Player player1;
@@ -43,6 +45,9 @@ public class GameWindow extends JFrame {
         width = w;
         height = h;
         shoot = new JButton("Shoot");
+        shoot.setMaximumSize(bd);
+        shoot.setMinimumSize(bd);
+        shoot.setPreferredSize(bd);
         player1turn = true;
         sliderLabel = new JLabel("Shot Power:");
         power = new JSlider(JSlider.HORIZONTAL, minPower, maxPower, minPower);
