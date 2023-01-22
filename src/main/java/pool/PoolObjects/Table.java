@@ -38,6 +38,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private int cursordir;
     public CueBall cueBall;
     private int temp;
+    public int lowestBallno;
 
     public Table() {
         balls = new ArrayList<Ball>();
@@ -51,6 +52,8 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         Ball ball7 = new Ball(7, 775, 237, Color.red, this);
         Ball ball8 = new Ball(8, 775, 263, Color.BLACK, this);
         Ball ball9 = new Ball(9, 800, 250, Color.yellow, this);
+        
+        lowestBallno = 1;
 
 
         balls.add(cueBall);

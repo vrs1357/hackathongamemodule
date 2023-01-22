@@ -21,6 +21,7 @@ public class GameWindow extends JFrame {
     private JPanel turn;
     private JTextArea playerTurn;
     public boolean player1turn;
+    private Player curPlayer;
 
     public Table gameTable;
     
@@ -97,6 +98,7 @@ public class GameWindow extends JFrame {
         topPanel.add(turn);
         mainPanel.add(topPanel);
         gameTable.initializeGame(mainPanel);
+        curPlayer = player1;
 
         // last command of frame instantiation
         pack();
@@ -129,12 +131,24 @@ public class GameWindow extends JFrame {
     // go to next frame
     public void actionPerformed(ActionEvent e)
     {
-        player1turn = !player1turn;
-        if(player1turn == true){
+        if(curPlayer.ballHit == 0 || curPlayer.ballHit != gameTable.lowestBallno)
+        {
+            if(curPlayer.equals(player1)){
+                curPlayer = player2;
+                player1.isTurn = false;
+            }
+            else{
+                curPlayer = player1;
+                player1.isTurn = true;
+            }
+        }
+        if(player1.isTurn){
             playerTurn.setText(player1.name +"'s Turn");
+            curPlayer = player1;
         }
         else{
             playerTurn.setText(player2.name +"'s Turn");
+            curPlayer = player2;
         }
         repaint();
     }
