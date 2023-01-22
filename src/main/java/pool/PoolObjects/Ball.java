@@ -3,11 +3,11 @@ package main.java.pool.PoolObjects;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.time.LocalTime;
-
+import java.util.concurrent.TimeUnit;
 import javax.swing.event.ChangeListener;
 
 public class Ball {
-    private static final double DECELERATION  = 0.0001;
+    private static final double DECELERATION  = 0.00001;
     private static final double RADIUS = 12;
     private double x;
     private double y;
@@ -76,44 +76,48 @@ public class Ball {
 
     public void move() {
         secondsPassed = LocalTime.now().getSecond() - moveStartTime; 
-        this.x += this.speed_x * secondsPassed;
-        this.y += this.speed_y * secondsPassed;
+        this.x += this.speed_x * secondsPassed/10;
+        this.y += this.speed_y * secondsPassed/10;
         System.out.println("x = " + this.x);
         decelerate(secondsPassed);
         moveStartTime = secondsPassed;
         gameTable.repaint();
-        if (!(Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) <= 0)){
+        if ((Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) > 0)){
             move();
         }
         // check collision
     }
 
     public void decelerate(double time) {
-        if(this.speed_x < 0){
-            this.speed_x += DECELERATION*time;
+        if(this.speed_x > 0){
+            this.speed_x = this.speed_x - (DECELERATION*time);
+            if(this.speed_x < 0){
+                this.speed_x = 0;
+            }
         }
-        else if(-1 < this.speed_x  && this.speed_x < 1 )
-        {
-            this.speed_x = 0;
-        }
-        else if(this.speed_x == 0){
-            this.speed_x = 0;
+        else if(this.speed_x < 0){
+            this.speed_x = this.speed_x + (DECELERATION*time);
+            if(this.speed_x > 0){
+                this.speed_x = 0;
+            }
         }
         else{
-            this.speed_x -= DECELERATION*time;
+            this.speed_x = 0;
         }
-
-        if(this.speed_y < 0){
-            this.speed_y += DECELERATION*time;
+        if(this.speed_y > 0){
+            this.speed_y = this.speed_y - (DECELERATION*time);
+            if(this.speed_y < 0){
+                this.speed_y = 0;
+            }
         }
-        else if(-1 < this.speed_y && this.speed_y < 1){
-            this.speed_y =0;
+        else if(this.speed_y < 0){
+            this.speed_y = this.speed_y+(DECELERATION*time);
+            if(this.speed_y > 0){
+                this.speed_y = 0;
+            }
         }
-        else if(this.speed_y == 0){
+        else{
             this.speed_y = 0;
-        }
-        else{
-            this.speed_y -= DECELERATION*time;
         }
     }
 

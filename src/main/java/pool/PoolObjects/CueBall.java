@@ -13,7 +13,7 @@ public class CueBall extends Ball {
     // set the initial velocity in x and y direction; used when hit by cue
     public void hit(double direction, double powerLevel) {
         this.speed_x = powerLevel * Math.cos(Math.toRadians(180-direction));
-        this.speed_y = powerLevel * Math.sin(Math.toRadians(direction));
+        this.speed_y = powerLevel * Math.sin(Math.toRadians(-direction));
         moveStartTime = LocalTime.now().getSecond();
         move();
     }
