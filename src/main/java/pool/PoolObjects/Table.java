@@ -25,9 +25,10 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
     private ArrayList<Ball> balls;
     private ArrayList<Ball> pocketed;
+    public boolean whatashot;
     public Cue cue;
     private int Y;
-    private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(100, 900, 50, 450));
+    private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(100, 900, 100, 400));
     private ArrayList<Map.Entry<Integer, Integer>> HOLES
             = new ArrayList<>(Arrays.asList(new AbstractMap.SimpleImmutableEntry<>(110, 60),
                                             new AbstractMap.SimpleImmutableEntry<>(500, 60),
@@ -82,6 +83,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
     public void pocketBall(int num) {
         pocketed.add(num, balls.get(num));
+        whatashot = true;
     }
 
     // for initializing a new game

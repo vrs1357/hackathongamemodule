@@ -61,11 +61,11 @@ public class GameWindow extends JFrame {
     public void setup(){
 
         player1 = new Player(
-            JOptionPane.showInputDialog(this, "PLAYER 1 NAME:")
+            JOptionPane.showInputDialog(this, "PLAYER 1 NAME:"), this
         );
 
         player2 = new Player(
-            JOptionPane.showInputDialog(this, "PLAYER 2 NAME:")
+            JOptionPane.showInputDialog(this, "PLAYER 2 NAME:"), this
         );
     }
 
@@ -96,6 +96,9 @@ public class GameWindow extends JFrame {
         topPanel.add(button);
         topPanel.add(slider);
         topPanel.add(turn);
+        mainPanel.setMaximumSize(new Dimension(1000, 600));
+        mainPanel.setMinimumSize(new Dimension(1000,600));
+        mainPanel.setPreferredSize(new Dimension(1000,600));
         mainPanel.add(topPanel);
         gameTable.initializeGame(mainPanel);
         curPlayer = player1;
@@ -131,7 +134,7 @@ public class GameWindow extends JFrame {
     // go to next frame
     public void actionPerformed(ActionEvent e)
     {
-        if(curPlayer.ballHit == 0 || curPlayer.ballHit != gameTable.lowestBallno)
+        if(curPlayer.hit())
         {
             if(curPlayer.equals(player1)){
                 curPlayer = player2;

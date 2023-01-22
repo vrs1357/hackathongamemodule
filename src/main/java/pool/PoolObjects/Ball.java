@@ -19,11 +19,13 @@ public class Ball {
     protected double speed_x;
     protected double speed_y;
     private boolean inHole;
-    private int number;
+    public final int number;
     private Color color;
     protected int moveStartTime;
     protected int secondsPassed;
     private Table gameTable;
+    private int contact;
+    private int contactNo;
 
 
     public Ball(int num, double xPos, double yPos, Color color, Table t) {
@@ -35,6 +37,8 @@ public class Ball {
         this.speed_y = 0;
         this.color = color;
         gameTable = t;
+        contact = 0;
+        contactNo = 0;
     }
 
     public double getSpeedX() {
@@ -109,7 +113,7 @@ public class Ball {
             }
         });
         timer.start();
-        // check collision
+        checkCollideTable();
     }
 
     public void update() {
@@ -170,6 +174,12 @@ public class Ball {
         this.speed_y = Math.sin(theta) * (component2 - component1);
         ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
         ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
+        
+        // tracker to switch turns
+        if(contact == 0){
+            contact++;
+            contactNo = ballCollide.number;
+        }
     }
 
     // direction: true->x-direction; false->y-direction
