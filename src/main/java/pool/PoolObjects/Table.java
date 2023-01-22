@@ -1,6 +1,7 @@
-package pool.PoolObjects;
+package main.java.pool.PoolObjects;
 
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.MouseInputListener;
 
 import org.w3c.dom.events.EventTarget;
@@ -46,8 +47,11 @@ public class Table extends JPanel{
     public void initializeGame(JPanel panel){
         //TODO: render the table, set relative positions of the game
 
-        this.setBounds(50, 100, 30, 250);
-        this.setBackground(Color.GREEN);
+        this.setPreferredSize(new Dimension(1000, 500));
+        this.setMinimumSize(new Dimension(1000, 500));
+        this.setMaximumSize(new Dimension(1000, 500));
+        this.setBackground(Color.GRAY);
+        this.setBorder(new BevelBorder(RAISED, Color.ORANGE, Color.DARK_GRAY));
         panel.add(this);
     }
     

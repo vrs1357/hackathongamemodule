@@ -37,6 +37,8 @@ public class GameWindow extends JFrame {
     private Player player1;
     private Player player2;
 
+
+    // constructor
     public GameWindow(int w, int h){
         width = w;
         height = h;
@@ -50,7 +52,7 @@ public class GameWindow extends JFrame {
         power.setPaintLabels(true);
         gameTable = new Table();
     }
-
+    // get player names
     public void setup(){
 
         player1 = new Player(
@@ -66,24 +68,24 @@ public class GameWindow extends JFrame {
         setSize(width, height);
         setTitle("Game Window");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(Color.YELLOW);
+        getContentPane().setBackground(Color.WHITE);
 
         playerTurn = new JTextArea(player1.name + "'s turn");
         playerTurn.setFont(playerTurn.getFont().deriveFont(35f));
         playerTurn.setEditable(false);
-
+        // constructing power slider
         slider = new JPanel();
         slider.add(sliderLabel);
         slider.add(power);
-
+        // constructing shoot button
         button = new JPanel();
         button.add(shoot);
-
+        // constructing turn windwow
         turn = new JPanel();
         turn.add(playerTurn);
+        // initializing the game
 
-        gameTable.initializeGame();
-
+        // assembling the main game window
         mainPanel = (JPanel)getContentPane();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         topPanel = new JPanel();
@@ -92,17 +94,18 @@ public class GameWindow extends JFrame {
         topPanel.add(slider);
         topPanel.add(turn);
         mainPanel.add(topPanel);
-        mainPanel.add(gameTable);
-        setLocationByPlatform(true);
+        gameTable.initializeGame(mainPanel);
 
+        
         // last command of frame instantiation
+        pack();
         setVisible(true);
 
 
     }
 
 
-    // use this to compile all actionListeners
+    // use this to compile all actionListeners for any interactive element on the board
     public void setUpListeners() {
 
         ActionListener buttonListener = new ActionListener() {
