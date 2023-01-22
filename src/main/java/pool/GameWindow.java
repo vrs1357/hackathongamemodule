@@ -20,7 +20,7 @@ public class GameWindow extends JFrame {
     public boolean player1turn;
     
     // slider components
-    private JSlider power;
+    public JSlider power;
     private JLabel sliderLabel;
     private int minPower = 0;
     private int maxPower = 10;
