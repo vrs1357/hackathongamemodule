@@ -130,13 +130,13 @@ public class Ball {
             this.DECELERATION = 0.997;
         }
         if(this.speed_x > 0){
-            this.speed_x = this.speed_x - (DECELERATION);
+            this.speed_x = this.speed_x*(DECELERATION);
             if(this.speed_x < 0){
                 this.speed_x = 0;
             }
         }
         else if(this.speed_x < 0){
-            this.speed_x = this.speed_x + (DECELERATION);
+            this.speed_x = this.speed_x*(DECELERATION);
             if(this.speed_x > 0){
                 this.speed_x = 0;
             }
@@ -145,13 +145,13 @@ public class Ball {
             this.speed_x = 0;
         }
         if(this.speed_y > 0){
-            this.speed_y = this.speed_y - (DECELERATION);
+            this.speed_y = this.speed_y*(DECELERATION);
             if(this.speed_y < 0){
                 this.speed_y = 0;
             }
         }
         else if(this.speed_y < 0){
-            this.speed_y = this.speed_y+(DECELERATION);
+            this.speed_y = this.speed_y*(DECELERATION);
             if(this.speed_y > 0){
                 this.speed_y = 0;
             }
