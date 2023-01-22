@@ -30,12 +30,12 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private int Y;
     private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(135, 865, 80, 420));
     private ArrayList<Map.Entry<Integer, Integer>> HOLES
-            = new ArrayList<>(Arrays.asList(new AbstractMap.SimpleImmutableEntry<>(110, 60),
-                                            new AbstractMap.SimpleImmutableEntry<>(500, 60),
-                                            new AbstractMap.SimpleImmutableEntry<>(890, 60),
-                                            new AbstractMap.SimpleImmutableEntry<>(110,440),
-                                            new AbstractMap.SimpleImmutableEntry<>(500, 440),
-                                            new AbstractMap.SimpleImmutableEntry<>(890, 440)));
+            = new ArrayList<>(Arrays.asList(new AbstractMap.SimpleImmutableEntry<>(120, 70),
+                                            new AbstractMap.SimpleImmutableEntry<>(500, 70),
+                                            new AbstractMap.SimpleImmutableEntry<>(880, 70),
+                                            new AbstractMap.SimpleImmutableEntry<>(120,430),
+                                            new AbstractMap.SimpleImmutableEntry<>(500, 430),
+                                            new AbstractMap.SimpleImmutableEntry<>(880, 430)));
     private int cursordir;
     public CueBall cueBall;
     private int temp;

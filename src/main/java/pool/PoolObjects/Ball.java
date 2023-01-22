@@ -198,13 +198,15 @@ public class Ball {
 
     public void render(Graphics g) {
         Graphics2D ball = (Graphics2D) g;
-        ball.setColor(this.color);
-        ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
-        if (this.number != 0) {
+        if (!isInHole()) {
+            ball.setColor(this.color);
+            ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
+            if (this.number != 0) {
             ball.setColor(Color.WHITE);
             ball.fillOval((int)(this.x - 9.0), (int)(this.y - 7.3), 14, 14);
             ball.setColor(Color.BLACK);
             ball.drawString(String.valueOf(this.number), (int)(this.x - 6.3), (int)(this.y + 4.0));
+            }
         }
     }
 
