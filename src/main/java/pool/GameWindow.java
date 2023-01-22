@@ -113,6 +113,7 @@ public class GameWindow extends JFrame {
             public void actionPerformed(ActionEvent ae){
                 System.out.println("bruh moment");
                 gameTable.cueBall.hit(gameTable.cue.angle, 0.1*appliedPower);
+                gameTable.cue.updatePos(0, 0);
             }
         };
         shoot.addActionListener(buttonListener);
