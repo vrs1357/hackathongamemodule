@@ -1,5 +1,6 @@
 package main.java.pool;
 
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -14,6 +15,7 @@ public class GameWindow extends JFrame {
     private JPanel button;
     private JPanel mainPanel;
     private JPanel topPanel;
+    private JPanel turn;
     private JTextArea playerTurn;
     public boolean player1turn;
     
@@ -33,6 +35,7 @@ public class GameWindow extends JFrame {
         height = h;
         shoot = new JButton("Shoot");
         playerTurn = new JTextArea("Player 1 turn");
+        playerTurn.setFont(playerTurn.getFont().deriveFont(40f));
         playerTurn.setEditable(false);
         player1turn = true;
         sliderLabel = new JLabel("Shot Power:");
@@ -41,6 +44,9 @@ public class GameWindow extends JFrame {
         power.setMajorTickSpacing(5);
         power.setPaintTicks(true);
         power.setPaintLabels(true);
+
+        getContentPane().setBackground(Color.WHITE);;  //Whatever color
+
     }
 
     public void createWindow(){
@@ -53,14 +59,17 @@ public class GameWindow extends JFrame {
 
         button = new JPanel();
         button.add(shoot);
-        button.add(playerTurn);
+
+        turn = new JPanel();
+        turn.add(playerTurn);
 
         mainPanel = (JPanel)getContentPane();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         topPanel = new JPanel();
-        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         topPanel.add(button);
         topPanel.add(slider);
+        topPanel.add(turn);
         mainPanel.add(topPanel);
         setLocationByPlatform(true);
 
