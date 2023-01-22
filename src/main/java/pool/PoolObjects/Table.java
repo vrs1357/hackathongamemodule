@@ -2,7 +2,9 @@ package main.java.pool.PoolObjects;
 
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.basic.BasicBorders;
 
 import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.MouseEvent;
@@ -19,7 +21,6 @@ public class Table extends JPanel{
 
     public Table() {
         ArrayList<Ball> balls = new ArrayList<Ball>();
-
         CueBall cueBall = new CueBall(0, 10, 20);
         Ball ball1 = new Ball(1, 60, 20);
         Ball ball2 = new Ball(2, 65, 20);
@@ -45,14 +46,22 @@ public class Table extends JPanel{
 
     // for initializing a new game
     public void initializeGame(JPanel panel){
-        //TODO: render the table, set relative positions of the game
-
+        
         this.setPreferredSize(new Dimension(1000, 500));
         this.setMinimumSize(new Dimension(1000, 500));
         this.setMaximumSize(new Dimension(1000, 500));
         this.setBackground(Color.GRAY);
-        this.setBorder(new BevelBorder(RAISED, Color.ORANGE, Color.DARK_GRAY));
         panel.add(this);
     }
+
+    public void paint(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.GREEN);
+        g2.fillRoundRect(100, 50, 800, 400, 40, 40);
+        g2.setColor(new Color(92,64,51));
+        g2.drawRoundRect(100,50,800,400,40,40);
+        g2.drawRoundRect(99,49,802,402,41,41);
+    }
+    
     
 }
