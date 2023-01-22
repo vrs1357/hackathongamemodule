@@ -112,10 +112,9 @@ public class GameWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae){
                 System.out.println("bruh moment");
-                gameTable.cueBall.hit(gameTable.cue.angle, 10*appliedPower);
+                gameTable.cueBall.hit(gameTable.cue.angle, 0.1*appliedPower);
             }
         };
-        
         shoot.addActionListener(buttonListener);
         power.addChangeListener(new ChangeListener() {
 

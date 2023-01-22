@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.time.LocalTime;
 
+import javax.swing.event.ChangeListener;
+
 public class Ball {
-    private static final double DECELERATION  = 0.02;
+    private static final double DECELERATION  = 0.0001;
     private static final double RADIUS = 12;
     private double x;
     private double y;
@@ -16,9 +18,10 @@ public class Ball {
     private Color color;
     protected int moveStartTime;
     protected int secondsPassed;
+    private Table gameTable;
 
 
-    public Ball(int num, double xPos, double yPos, Color color) {
+    public Ball(int num, double xPos, double yPos, Color color, Table t) {
         this.inHole = false;
         this.number = num;
         this.x = xPos;
@@ -26,6 +29,7 @@ public class Ball {
         this.speed_x = 0;
         this.speed_y = 0;
         this.color = color;
+        gameTable = t;
     }
 
     public double getSpeedX() {
@@ -74,16 +78,42 @@ public class Ball {
         secondsPassed = LocalTime.now().getSecond() - moveStartTime; 
         this.x += this.speed_x * secondsPassed;
         this.y += this.speed_y * secondsPassed;
+        System.out.println("x = " + this.x);
         decelerate(secondsPassed);
+        moveStartTime = secondsPassed;
+        gameTable.repaint();
+        if (!(Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) <= 0)){
+            move();
+        }
         // check collision
     }
 
     public void decelerate(double time) {
-        this.speed_x -= DECELERATION * time;
-        this.speed_y -= DECELERATION * time;
+        if(this.speed_x < 0){
+            this.speed_x += DECELERATION*time;
+        }
+        else if(-1 < this.speed_x  && this.speed_x < 1 )
+        {
+            this.speed_x = 0;
+        }
+        else if(this.speed_x == 0){
+            this.speed_x = 0;
+        }
+        else{
+            this.speed_x -= DECELERATION*time;
+        }
 
-        if (!(Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) <= 0)){
-            move();
+        if(this.speed_y < 0){
+            this.speed_y += DECELERATION*time;
+        }
+        else if(-1 < this.speed_y && this.speed_y < 1){
+            this.speed_y =0;
+        }
+        else if(this.speed_y == 0){
+            this.speed_y = 0;
+        }
+        else{
+            this.speed_y -= DECELERATION*time;
         }
     }
 
@@ -119,6 +149,7 @@ public class Ball {
         }
     }
 
-    private void updatePos(){
+    public void addChangeListener(ChangeListener ballmove) {
+        this.addChangeListener(ballmove);
     }
 }

@@ -1,9 +1,11 @@
-package pool.PoolObjects;
+package main.java.pool.PoolObjects;
 
 import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicBorders;
 
 import org.w3c.dom.events.EventTarget;
@@ -26,19 +28,19 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private int cursordir;
     public CueBall cueBall;
     private int temp;
-
     public Table() {
+       
         balls = new ArrayList<Ball>();
-        cueBall = new CueBall(0, 280, 250, Color.WHITE);
-        Ball ball1 = new Ball(1, 700, 250, Color.YELLOW);
-        Ball ball2 = new Ball(2, 725, 237, Color.BLUE);
-        Ball ball3 = new Ball(3, 725, 263, Color.RED);
-        Ball ball4 = new Ball(4, 750, 224, Color.MAGENTA);
-        Ball ball5 = new Ball(5, 750, 250, Color.ORANGE);
-        Ball ball6 = new Ball(6, 750, 276, Color.GREEN);
-        Ball ball7 = new Ball(7, 775, 237, Color.red);
-        Ball ball8 = new Ball(8, 775, 263, Color.BLACK);
-        Ball ball9 = new Ball(9, 800, 250, Color.yellow);
+        cueBall = new CueBall(0, 280, 250, Color.WHITE, this);
+        Ball ball1 = new Ball(1, 700, 250, Color.YELLOW, this);
+        Ball ball2 = new Ball(2, 725, 237, Color.BLUE, this);
+        Ball ball3 = new Ball(3, 725, 263, Color.RED, this);
+        Ball ball4 = new Ball(4, 750, 224, Color.MAGENTA, this);
+        Ball ball5 = new Ball(5, 750, 250, Color.ORANGE, this);
+        Ball ball6 = new Ball(6, 750, 276, Color.GREEN, this);
+        Ball ball7 = new Ball(7, 775, 237, Color.red, this);
+        Ball ball8 = new Ball(8, 775, 263, Color.BLACK, this);
+        Ball ball9 = new Ball(9, 800, 250, Color.yellow, this);
 
         balls.add(ball1);
         balls.add(ball2);
@@ -165,7 +167,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
     @Override
     public void mouseDragged(java.awt.event.MouseEvent e) {
-        System.out.println("" + cursordir);
+        System.out.println(cue.angle);
         
         Point location = MouseInfo.getPointerInfo().getLocation();
         int newY = (int) Math.round(location.getY());
