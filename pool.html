@@ -1,16 +1,29 @@
 <!DOCTYPE html> 
 <html> 
-<head> 
-<title>Online Pool Game</title> 
-<link rel="stylesheet" type="text/css" href="styles.css">
-</head> 
-<body> 
+    <head> 
+        <title>Online Pool Game</title> 
+            <link rel="stylesheet" type="text/css" href="styles.css">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded&display=swap" rel="stylesheet">
+    </head> 
+    <body> 
+            <h1>Welcome to the Online Pool Game!</h1> 
 
-<h1>Welcome to the Online Pool Game</h1> 
+            <p>Click on the button below to start playing:</p> 
+            
+            <button id="start-button" onclick="window.location.href = 'game.html';">Play</button>
 
-<p>Click on the button below to start playing:</p> 
+            
+            <img src = "https://static.wixstatic.com/media/045b3c_cb61b3dd72c14cfc8ec11cc972aa8947~mv2.gif"
+                class = "pool-gif">
 
-<button onclick="window.location.href = 'game.html';">Play</button> 
-
-</body> 
+            <!--
+                <div class="sound-icon-container">
+                <img src="https://icon-library.com/images/sound-icon-vector/sound-icon-vector-3.jpg" 
+                class="sound-icon" id="sound-icon"> 
+            -->
+            </div>
+            <script src="pool.js"></script> 
+    </body> 
 </html>

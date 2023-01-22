@@ -1,11 +1,11 @@
 body {
-    background-color: #D3D3D3; 
-    font-family: Arial, sans-serif; 
+    background-color: #000000; 
+    font-family:"Unbounded"; 
     text-align: center; 
 }
 
 h1 {
-    color: #e21809; 
+    color: #ffffff; 
     font-size: 3em; 
     margin-bottom: 0.5em; 
 }
@@ -26,6 +26,61 @@ button {
 }
 
 button:hover {
-    background-color: #e24b1c; 
+    background-color: #000000; 
     cursor: pointer; 
 }
+
+@keyframes roll {
+    0% {
+        left: 0; /* starting position: bottom left */
+        bottom: 0;
+        transform: rotate(0deg); /* starting rotation */
+    }
+    20% {
+        left: 20%; /* increase the left value at each keyframe to make the ball move */
+        bottom: 0;
+        transform: rotate(45deg); /* increase the rotation at each keyframe to make the ball spin */
+    }
+    40% {
+        left: 40%;
+        bottom: 0;
+        transform: rotate(90deg);
+    }
+    60% {
+        left: 60%;
+        bottom: 0;
+        transform: rotate(135deg);
+    }
+    80% {
+        left: 80%;
+        bottom: 0;
+        transform: rotate(180deg);
+    }
+    100% {
+        left: 100%;
+        bottom: 0;
+        transform: rotate(360deg); /* full rotation over the course of the animation */
+    }
+}
+
+.pool-ball {
+    position: absolute; 
+    left: 0; 
+    bottom: 0;
+    width: 50px; 
+    animation: roll 50s linear forwards;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.sound-icon-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.sound-icon {
+    width: 25px;
+    height: auto;
+}
+
