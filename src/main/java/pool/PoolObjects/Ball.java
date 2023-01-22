@@ -89,7 +89,7 @@ public class Ball {
             int holeX = hole.getKey();
             int holeY = hole.getValue();
 
-            if (Math.abs(holeX-this.x) < RADIUS || Math.abs(holeY-this.y) < RADIUS) {
+            if (Math.sqrt(Math.pow(holeX-this.x, 2) + Math.pow(holeY-this.y, 2)) <= RADIUS) {
                 this.inHole = true;
                 gameTable.pocketBall(this.number);
                 this.speed_y = 0;
@@ -113,6 +113,7 @@ public class Ball {
             }
         });
         timer.start();
+        sink();
         checkCollideTable();
     }
 
@@ -174,7 +175,7 @@ public class Ball {
         this.speed_y = Math.sin(theta) * (component2 - component1);
         ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
         ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
-        
+
         // tracker to switch turns
         if(contact == 0){
             contact++;
