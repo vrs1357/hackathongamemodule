@@ -6,7 +6,7 @@ import java.math.*;
 
 import javax.swing.plaf.basic.BasicTabbedPaneUI.MouseHandler;
 
-public class Cue implements MouseListener {
+public class Cue{
     private int x;
     private int y;
 
@@ -14,7 +14,7 @@ public class Cue implements MouseListener {
 
     private int length = 300;
     private Color cueColor;
-    private double angle; // in degrees
+    public double angle; // in degrees
     public Cue(int x, int y){
         this.x = x;
         this.y = y;
@@ -45,35 +45,6 @@ public class Cue implements MouseListener {
 
     public void updatePos(int angle){
         this.angle = this.angle + angle;
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        Point location = MouseInfo.getPointerInfo().getLocation();
-        Y = (int) Math.round(location.getY());        
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        Point location = MouseInfo.getPointerInfo().getLocation();
-        int newY = (int) Math.round(location.getY());
-
-        int deltaTheta = Y - newY;
-        angle = angle + deltaTheta;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
     }
 
 }

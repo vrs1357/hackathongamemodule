@@ -29,6 +29,7 @@ public class GameWindow extends JFrame {
     private JLabel sliderLabel;
     private int minPower = 0;
     private int maxPower = 10;
+    private int appliedPower = 0;
     
     
     //button components
@@ -111,6 +112,7 @@ public class GameWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae){
                 System.out.println("bruh moment");
+                gameTable.cueBall.hit(gameTable.cue.angle, 10*appliedPower);
             }
         };
         
@@ -120,7 +122,7 @@ public class GameWindow extends JFrame {
             @Override
             public void stateChanged(ChangeEvent e) {
                 System.out.println(power.getValue());
-                actionPerformed(null);
+                appliedPower = power.getValue();
             }
             
         });

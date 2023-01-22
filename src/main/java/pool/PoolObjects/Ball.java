@@ -2,7 +2,7 @@ package main.java.pool.PoolObjects;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.util.Scanner;
+import java.time.LocalTime;
 
 public class Ball {
     private static final double DECELERATION  = 0.02;
@@ -14,6 +14,8 @@ public class Ball {
     private boolean inHole;
     private int number;
     private Color color;
+    protected int moveStartTime;
+    protected int secondsPassed;
 
 
     public Ball(int num, double xPos, double yPos, Color color) {
@@ -68,16 +70,21 @@ public class Ball {
         this.speed_x = 0;
     }
 
-    public void move(double time) {
-        this.x += this.speed_x * time;
-        this.y += this.speed_y * time;
-        decelerate(time);
+    public void move() {
+        secondsPassed = LocalTime.now().getSecond() - moveStartTime; 
+        this.x += this.speed_x * secondsPassed;
+        this.y += this.speed_y * secondsPassed;
+        decelerate(secondsPassed);
         // check collision
     }
 
     public void decelerate(double time) {
         this.speed_x -= DECELERATION * time;
         this.speed_y -= DECELERATION * time;
+
+        if (!(Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) <= 0)){
+            move();
+        }
     }
 
     public void collideBall(Ball ballCollide) {
@@ -100,8 +107,8 @@ public class Ball {
         }
     }
 
-    public void render(Graphics2D ball) {
-        //Graphics2D ball = (Graphics2D) g;
+    public void render(Graphics g) {
+        Graphics2D ball = (Graphics2D) g;
         ball.setColor(this.color);
         ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
         if (this.number != 0) {
@@ -110,5 +117,8 @@ public class Ball {
             ball.setColor(Color.BLACK);
             ball.drawString(String.valueOf(this.number), (int)(this.x - 6.3), (int)(this.y + 4.0));
         }
+    }
+
+    private void updatePos(){
     }
 }

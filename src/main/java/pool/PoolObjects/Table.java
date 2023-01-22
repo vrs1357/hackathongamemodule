@@ -24,12 +24,12 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     public Cue cue;
     private int Y;
     private int cursordir;
-
+    public CueBall cueBall;
     private int temp;
 
     public Table() {
         balls = new ArrayList<Ball>();
-        CueBall cueBall = new CueBall(0, 280, 250, Color.WHITE);
+        cueBall = new CueBall(0, 280, 250, Color.WHITE);
         Ball ball1 = new Ball(1, 700, 250, Color.YELLOW);
         Ball ball2 = new Ball(2, 725, 237, Color.BLUE);
         Ball ball3 = new Ball(3, 725, 263, Color.RED);
