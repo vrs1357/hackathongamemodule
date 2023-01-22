@@ -1,4 +1,4 @@
-package main.java.pool;
+package pool;
 
 public class main {
 
@@ -6,7 +6,6 @@ public class main {
         GameWindow window = new GameWindow(1280, 720);
         window.createWindow();
         window.setUpListeners();
-
     }
 }
 
