@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -77,9 +79,20 @@ public class Ball {
     }
 
     public void sink() {
-        this.inHole = true;
-        this.speed_y = 0;
-        this.speed_x = 0;
+        ArrayList<Map.Entry<Integer, Integer>> holes = gameTable.getHoles();
+
+        for (Map.Entry<Integer, Integer> hole : holes) {
+            int holeX = hole.getKey();
+            int holeY = hole.getValue();
+
+            if (Math.abs(holeX-this.x) < RADIUS || Math.abs(holeY-this.y) < RADIUS) {
+                this.inHole = true;
+                gameTable.pocketBall(this.number);
+                this.speed_y = 0;
+                this.speed_x = 0;
+            } else {
+            }
+        }
     }
 
     public void move() {
@@ -117,13 +130,13 @@ public class Ball {
             this.DECELERATION = 0.997;
         }
         if(this.speed_x > 0){
-            this.speed_x = this.speed_x*DECELERATION;
+            this.speed_x = this.speed_x - (DECELERATION);
             if(this.speed_x < 0){
                 this.speed_x = 0;
             }
         }
         else if(this.speed_x < 0){
-            this.speed_x = this.speed_x * (DECELERATION);
+            this.speed_x = this.speed_x + (DECELERATION);
             if(this.speed_x > 0){
                 this.speed_x = 0;
             }
@@ -132,13 +145,13 @@ public class Ball {
             this.speed_x = 0;
         }
         if(this.speed_y > 0){
-            this.speed_y = this.speed_y * (DECELERATION);
+            this.speed_y = this.speed_y - (DECELERATION);
             if(this.speed_y < 0){
                 this.speed_y = 0;
             }
         }
         else if(this.speed_y < 0){
-            this.speed_y = this.speed_y*(DECELERATION);
+            this.speed_y = this.speed_y+(DECELERATION);
             if(this.speed_y > 0){
                 this.speed_y = 0;
             }
@@ -160,10 +173,10 @@ public class Ball {
     }
 
     // direction: true->x-direction; false->y-direction
-    public void collideTable(boolean isX) {
-        if (isX) {
+    public void checkCollideTable() {
+        if (this.x <= gameTable.getBroundar().get(0) || this.x >= gameTable.getBroundar().get(1)) {
             this.speed_x *= -1;
-        } else {
+        } else if (this.y <= gameTable.getBroundar().get(2) || this.y >= gameTable.getBroundar().get(3)) {
             this.speed_y *= -1;
         }
     }
