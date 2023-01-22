@@ -12,8 +12,12 @@ import org.w3c.dom.views.AbstractView;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.*;
 import java.lang.reflect.Array;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 import static javax.swing.border.EtchedBorder.RAISED;
 
@@ -23,6 +27,14 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private ArrayList<Ball> pocketed;
     public Cue cue;
     private int Y;
+    private ArrayList<Integer> BOUNDARY = new ArrayList<Integer>(Arrays.asList(100, 900, 50, 450));
+    private ArrayList<Map.Entry<Integer, Integer>> HOLES
+            = new ArrayList<>(Arrays.asList(new AbstractMap.SimpleImmutableEntry<>(110, 60),
+                                            new AbstractMap.SimpleImmutableEntry<>(500, 60),
+                                            new AbstractMap.SimpleImmutableEntry<>(890, 60),
+                                            new AbstractMap.SimpleImmutableEntry<>(110,440),
+                                            new AbstractMap.SimpleImmutableEntry<>(500, 440),
+                                            new AbstractMap.SimpleImmutableEntry<>(890, 440)));
     private int cursordir;
     public CueBall cueBall;
     private int temp;
@@ -40,6 +52,8 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         Ball ball8 = new Ball(8, 775, 263, Color.BLACK, this);
         Ball ball9 = new Ball(9, 800, 250, Color.yellow, this);
 
+
+        balls.add(cueBall);
         balls.add(ball1);
         balls.add(ball2);
         balls.add(ball3);
@@ -49,11 +63,22 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         balls.add(ball7);
         balls.add(ball8);
         balls.add(ball9);
-        balls.add(cueBall);
 
         cue = new Cue((int) cueBall.getX(), (int) cueBall.getY());
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
+    }
+
+    public ArrayList<Integer> getBroundar() {
+        return BOUNDARY;
+    }
+
+    public ArrayList<Map.Entry<Integer, Integer>> getHoles() {
+        return HOLES;
+    }
+
+    public void pocketBall(int num) {
+        pocketed.add(num, balls.get(num));
     }
 
     // for initializing a new game
