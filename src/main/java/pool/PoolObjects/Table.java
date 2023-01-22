@@ -46,21 +46,73 @@ public class Table extends JPanel{
 
     // for initializing a new game
     public void initializeGame(JPanel panel){
-        
+
         this.setPreferredSize(new Dimension(1000, 500));
         this.setMinimumSize(new Dimension(1000, 500));
         this.setMaximumSize(new Dimension(1000, 500));
         this.setBackground(Color.GRAY);
         panel.add(this);
     }
-
+    // draw the pool table
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.GREEN);
+        g2.setColor(new Color(0,100,0));
         g2.fillRoundRect(100, 50, 800, 400, 40, 40);
-        g2.setColor(new Color(92,64,51));
+        g2.setColor(new Color(150,75,0));
+        
+        g2.setColor(new Color(102,51,0));
+        for(int i = 120; i < 801; i = i+ 380){
+            for(int j = 50; j < 451; j = j+380){
+                g2.fillRoundRect(i,j,380,20,0,0);
+            }
+        }
+        for(int i = 100; i < 901; i = i+780){
+            g2.fillRoundRect(i,70,20, 360, 0, 0);
+        }
+
+        g2.setColor(Color.black);
+        for(int i = 100; i < 901; i = i+380){
+            for(int j = 50; j < 451; j = j + 360){
+                g2.fillOval(i, j, 40, 40);
+            }
+        }
+        g2.setColor(new Color(150,75,0));
+        g2.setStroke(new BasicStroke(4));
+        for(int i = 140; i < 881; i = i+380){
+            for(int j = 70; j < 440; j = j+360){
+                g2.drawLine(i, j, i+340, j);
+            }
+        }
+        for(int i = 120; i < 901; i += 760){
+            g2.drawLine(i,90,i,410);
+        }
+        for(int i = 100; i < 901; i = i+380){
+            for(int j = 50; j < 451; j= j +360){
+                if(j < 200){
+                    if(i < 160){
+                        g2.drawArc(i, j, 40, 40, 270,-90);
+                    }
+                    else if (i > 500){
+                        g2.drawArc(i,j,40,40,0,-90);
+                    }
+                    g2.drawArc(i, j, 40, 40, 0,180);
+                }
+                else{
+                    g2.drawArc(i, j, 40, 40, 180,180);
+
+                    if(i < 160){
+                        g2.drawArc(i, j, 40, 40, 270,-90);
+                    }
+                    else if (i > 600){
+                        g2.drawArc(i,j,40,40,0,90);
+                    }
+                }
+            }
+        }
+        g2.drawArc(100,70+340, 40, 40, 90 ,90);
+
         g2.drawRoundRect(100,50,800,400,40,40);
-        g2.drawRoundRect(99,49,802,402,41,41);
+
     }
     
     
