@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import javax.swing.Timer;
 
 public class CueBall extends Ball {
+    public int firstHitBall;
     public CueBall(int num, double xPos, double yPos, Color color, Table t) {
         super(num, xPos, yPos, color, t);
         moveStartTime = 0;

@@ -19,11 +19,13 @@ public class Ball {
     protected double speed_x;
     protected double speed_y;
     private boolean inHole;
-    private int number;
+    public final int number;
     private Color color;
     protected int moveStartTime;
     protected int secondsPassed;
     private Table gameTable;
+    private int contact;
+    private int contactNo;
 
 
     public Ball(int num, double xPos, double yPos, Color color, Table t) {
@@ -35,6 +37,8 @@ public class Ball {
         this.speed_y = 0;
         this.color = color;
         gameTable = t;
+        contact = 0;
+        contactNo = 0;
     }
 
     public double getSpeedX() {
@@ -62,6 +66,10 @@ public class Ball {
         return this.y;
     }
 
+//    public double getRadius() {
+//        return RADIUS;
+//    }
+
     public boolean isInHole() {
         return this.inHole;
     }
@@ -85,7 +93,7 @@ public class Ball {
             int holeX = hole.getKey();
             int holeY = hole.getValue();
 
-            if (Math.abs(holeX-this.x) < RADIUS || Math.abs(holeY-this.y) < RADIUS) {
+            if (Math.sqrt(Math.pow(holeX-this.x, 2) + Math.pow(holeY-this.y, 2)) <= RADIUS) {
                 this.inHole = true;
                 gameTable.pocketBall(this.number);
                 this.speed_y = 0;
@@ -109,7 +117,9 @@ public class Ball {
             }
         });
         timer.start();
-        // check collision
+        checkBallCollisions();
+        sink();
+        checkCollideTable();
     }
 
     public void update() {
@@ -161,6 +171,19 @@ public class Ball {
         }
     }
 
+    public void checkBallCollisions() {
+        ArrayList<Ball> balls = gameTable.getBalls();
+        for (int i = 0; i < balls.size(); i++) {
+            if (i != this.number) {
+                Ball b = balls.get(i);
+                double dist = this.getDistanceOtherBall(b);
+                if (dist <= RADIUS) {
+                    this.collideBall(b);
+                }
+            }
+        }
+    }
+
     public void collideBall(Ball ballCollide) {
         double theta = Math.atan2(ballCollide.y - this.y, ballCollide.x - this.x);
         double component1 = this.getComponent(theta);
@@ -170,26 +193,43 @@ public class Ball {
         this.speed_y = Math.sin(theta) * (component2 - component1);
         ballCollide.setSpeedX(Math.cos(theta) * (component1 - component2));
         ballCollide.setSpeedY(Math.sin(theta) * (component1 - component2));
+        ballCollide.move();
+
+        // tracker to switch turns
+        if(contact == 0){
+            contact++;
+            contactNo = ballCollide.number;
+        }
+    }
+
+    public double getDistanceOtherBall(Ball ballOther) {
+        return Math.sqrt(Math.pow(ballOther.getX() - x, 2) + Math.pow(ballOther.getY() - y, 2));
     }
 
     // direction: true->x-direction; false->y-direction
     public void checkCollideTable() {
-        if (this.x <= gameTable.getBroundar().get(0) || this.x >= gameTable.getBroundar().get(1)) {
-            this.speed_x *= -1;
-        } else if (this.y <= gameTable.getBroundar().get(2) || this.y >= gameTable.getBroundar().get(3)) {
-            this.speed_y *= -1;
+        if (this.x <= gameTable.getBroundary().get(0)){
+            this.speed_x = Math.abs(this.speed_x);
+        }else if(this.x >= gameTable.getBroundary().get(1)) {
+            this.speed_x = -1*Math.abs(this.speed_x);
+        } else if(this.y <= gameTable.getBroundary().get(2)){
+            this.speed_y = Math.abs(this.speed_y);
+        } else if(this.y >= gameTable.getBroundary().get(3)) {
+            this.speed_y = -1*Math.abs(this.speed_y);
         }
     }
 
     public void render(Graphics g) {
         Graphics2D ball = (Graphics2D) g;
-        ball.setColor(this.color);
-        ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
-        if (this.number != 0) {
+        if (!isInHole()) {
+            ball.setColor(this.color);
+            ball.fill(new Ellipse2D.Double(this.x - this.RADIUS, this.y - this.RADIUS, 2.0 * this.RADIUS, 2.0 * this.RADIUS));
+            if (this.number != 0) {
             ball.setColor(Color.WHITE);
             ball.fillOval((int)(this.x - 9.0), (int)(this.y - 7.3), 14, 14);
             ball.setColor(Color.BLACK);
             ball.drawString(String.valueOf(this.number), (int)(this.x - 6.3), (int)(this.y + 4.0));
+            }
         }
     }
 
