@@ -1,4 +1,4 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 public class Player {
     

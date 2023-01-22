@@ -1,4 +1,4 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class Cue{
     public Cue(int x, int y){
         this.x = x;
         this.y = y;
-        angle = 180;
+        angle = 0;
         cueColor = new Color(214,184,90);
     }
 
@@ -27,16 +27,16 @@ public class Cue{
         
         
         machine.setStroke(new BasicStroke(10));
-        machine.drawLine(x+ 20,y, x+length,y); 
+        machine.drawLine(x- 20, y, x-length,y);
 
         machine.setColor(new Color(127,125,156));
         machine.setStroke(new BasicStroke(5));
-        machine.drawLine(x+18, y-3, x+18, y+3);
+        machine.drawLine(x-18, y-3, x-18, y+3);
 
         machine.setStroke(new BasicStroke(1));
         machine.setColor(Color.BLACK);
         for(int i = y-5; i < y+6; i+=10){
-            machine.drawLine(x+20, i, x+length, i);
+            machine.drawLine(x-20, i, x-length, i);
         }
         
     }

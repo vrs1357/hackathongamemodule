@@ -1,9 +1,12 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.time.LocalTime;
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 public class Ball {
@@ -81,13 +84,21 @@ public class Ball {
         System.out.println("x = " + this.x);
         decelerate(secondsPassed);
         moveStartTime = secondsPassed;
-        gameTable.repaint();
-        if ((Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) > 0)){
-            move();
-        }
+        Timer timer = new Timer(1000/60, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                update();
+            }
+        });
+        timer.start();
         // check collision
     }
 
+    public void update() {
+        gameTable.updateUI();
+        if ((Math.sqrt(Math.pow(this.speed_x, 2) + Math.pow(this.speed_y, 2)) > 0)){
+            move();
+        }
+    }
     public void decelerate(double time) {
         if(this.speed_x > 0){
             this.speed_x = this.speed_x - (DECELERATION*time);

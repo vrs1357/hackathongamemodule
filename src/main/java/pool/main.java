@@ -1,14 +1,22 @@
-package main.java.pool;
+package pool;
 
-import main.java.pool.PoolObjects.Table;
+import pool.PoolObjects.Table;
+
+import java.awt.*;
+import java.util.Timer;
 
 public class main {
 
     public static void main(String[] args) {
-        GameWindow window = new GameWindow(1280, 720);
-        window.setup();
-        window.createWindow();
-        window.setUpListeners();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                @SuppressWarnings("unused")
+                GameWindow window = new GameWindow(1280, 720);
+                window.setup();
+                window.createWindow();
+                window.setUpListeners();
+            }
+        });
     }
 }
 

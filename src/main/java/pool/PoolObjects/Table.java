@@ -1,11 +1,9 @@
-package main.java.pool.PoolObjects;
+package pool.PoolObjects;
 
 import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicBorders;
 
 import org.w3c.dom.events.EventTarget;
@@ -28,8 +26,8 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
     private int cursordir;
     public CueBall cueBall;
     private int temp;
+
     public Table() {
-       
         balls = new ArrayList<Ball>();
         cueBall = new CueBall(0, 280, 250, Color.WHITE, this);
         Ball ball1 = new Ball(1, 700, 250, Color.YELLOW, this);
@@ -56,7 +54,6 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
         cue = new Cue((int) cueBall.getX(), (int) cueBall.getY());
         this.addMouseMotionListener(this);
         this.addMouseListener(this);
-
     }
 
     // for initializing a new game
@@ -167,7 +164,7 @@ public class Table extends JPanel implements MouseMotionListener, MouseListener 
 
     @Override
     public void mouseDragged(java.awt.event.MouseEvent e) {
-        System.out.println(cue.angle);
+        System.out.println("" + cue.angle);
         
         Point location = MouseInfo.getPointerInfo().getLocation();
         int newY = (int) Math.round(location.getY());

@@ -1,4 +1,4 @@
-package main.java.pool;
+package pool;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import main.java.pool.PoolObjects.*;
+import pool.PoolObjects.*;
 
 
 public class GameWindow extends JFrame {
@@ -98,7 +98,6 @@ public class GameWindow extends JFrame {
         mainPanel.add(topPanel);
         gameTable.initializeGame(mainPanel);
 
-
         // last command of frame instantiation
         pack();
         setVisible(true);
@@ -112,8 +111,8 @@ public class GameWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae){
                 System.out.println("bruh moment");
-                gameTable.cueBall.hit(gameTable.cue.angle, 0.1*appliedPower);
-                gameTable.cue.updatePos(0, 0);
+                gameTable.cueBall.hit(-gameTable.cue.angle, appliedPower * 0.2);
+                gameTable.cue.updatePos(-300, -300);
             }
         };
         shoot.addActionListener(buttonListener);
@@ -124,11 +123,8 @@ public class GameWindow extends JFrame {
                 System.out.println(power.getValue());
                 appliedPower = power.getValue();
             }
-            
         });
     }
-
-
 
     // go to next frame
     public void actionPerformed(ActionEvent e)
@@ -139,8 +135,7 @@ public class GameWindow extends JFrame {
         }
         else{
             playerTurn.setText(player2.name +"'s Turn");
-        }                
+        }
         repaint();
     }
-
 }
