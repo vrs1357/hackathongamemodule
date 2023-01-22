@@ -10,12 +10,12 @@ public class Ball {
     private boolean inHole;
     private int number;
 
-    public void Ball() {
-
+    public Ball(int num, double xPos, double yPos) {
+        inHole = false;
+        number = num;
+        x = xPos;
+        y = yPos;
+        speed_x = 0;
+        speed_y = 0;
     }
-
-
-
-
-
 }
