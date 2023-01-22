@@ -1,4 +1,4 @@
-package pool;
+package main.java.pool;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import pool.PoolObjects.*;
+import main.java.pool.PoolObjects.*;
 
 
 public class GameWindow extends JFrame {

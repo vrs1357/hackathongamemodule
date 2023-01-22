@@ -1,4 +1,4 @@
-package pool.PoolObjects;
+package main.java.pool.PoolObjects;
 
 import java.awt.*;
 

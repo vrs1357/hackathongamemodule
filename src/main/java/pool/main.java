@@ -1,6 +1,6 @@
-package pool;
+package main.java.pool;
 
-import pool.PoolObjects.Table;
+import main.java.pool.PoolObjects.Table;
 
 public class main {
 
